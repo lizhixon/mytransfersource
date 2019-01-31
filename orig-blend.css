@@ -1,0 +1,383 @@
+/* 
+
+    orig-blend.css
+    Programmer: Elizabeth Hixon
+    http://florydesign.com, http://elizabethhixon.com
+
+*/
+
+:root {
+    --light-blue-color: white;
+    --absolute-position: absolute;
+}
+
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.preview {
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    background-color: var(--light-blue-color);
+    border: 1px solid #ddd;
+}
+    
+.preview-img {
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    margin-top: -100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-blend-mode: normal;
+    background-color: inherit;
+}
+
+.thumbnail {
+    cursor: pointer;
+    float: left;
+    width: 50%;
+    height: 0;
+    padding-top: 50%;
+    position: relative;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-color: var(--light-blue-color);
+    position: relative;
+    text-align: center;
+}
+
+.descriptions {
+    padding: 8px 0px 8px 0px;
+}
+
+.thumbnail[data-mode]:: after {
+    content: attr(data-mode);
+    display: block;
+    position: absolute;
+    top: 0;
+    font-size: .8em;
+    line-height: 4;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+[data-mode=normal] {
+    background-blend-mode: normal;
+}
+
+[data-mode=multiply] {
+    background-blend-mode: multiply;
+}
+
+svg{
+    display: block;
+    cursor: pointer;
+}
+
+.icon{
+    display: inline-block;
+    margin: .75em;
+    width: 1.75em;
+    height: 1.75em;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/*this defines the useless svg tag to be invisible*/
+.text-icon {
+    width: 0;
+    height: 0;
+}
+
+#mixMode {
+    display: none;
+}
+
+input,select{
+    cursor: pointer;
+}
+
+.color-input,.drop-icon,.file-input,.upload-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+.drop-icon {
+    fill: var(--light-blue-color);
+}
+
+.color-input {
+    z-index: 2;
+    height: 3em;
+    width: 3em;
+    border: 0;
+    opacity: 0;
+}
+
+.file-input {
+    z-index: 2;
+    width: 3em;
+    height: 3em;
+    opacity: 0;
+}
+
+input[type="range"] {
+    margin: 0;
+}
+    
+.slider-style {
+    display: inline-block;
+    font-size: 90%;
+    line-height: 100%;
+    text-align: center;
+}
+    
+#slider-style {
+    margin: 0px 3px;
+}
+    
+#poly-cotton-blend {
+    padding: 0px;
+}
+
+#poly-cotton-slider {
+    margin-bottom: 16px;
+}
+    
+#poly-value, #cotton-value {
+    display: inline-block;
+    width: 40px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+@media (min-width: 600px){
+    .container{
+        width: 93vw;
+        margin: 0 auto;
+    }
+    .preview{
+        width: 60%;
+        padding-top: 60%;
+        float: left;
+    }
+    .thumbnail{
+        width: 20%;
+        padding-top: 20%;
+    }
+}
+
+@media (min-width: 1024px){
+    h1{
+        font-size: 2em;
+    }
+    li[data-mode]:: after{
+        line-height: 100px;
+    }
+    .wrapper{
+        width: 60%;
+        margin: 5em auto;
+    }
+}
+
+@media (min-width: 1400px){
+    h1{
+        font-size: 3em;
+    }
+    .thumbnail[data-mode]:: after{
+        line-height: 130px;
+    }
+}
+
+
+
+/*colpick styles*/
+.colpick{
+    position: var(--absolute-position);
+    width: 346px;
+    height: 170px;
+    left:-346px;
+    background: #fff;
+    border: 1px solid #eee;
+    z-index: 5;
+}
+
+/**/
+.colpick_color{
+    position: var(--absolute-position);
+    left: 7px;
+    top: 7px;
+    width: 156px;
+    height: 156px;
+    cursor: crosshair;
+}
+
+/*gradient visibility on the color selection box*/
+.colpick_color_overlay1{
+    position: var(--absolute-position);
+    left: 0;
+    top: 0;
+    width: 156px;
+    height: 156px;
+    background:-webkit-gradient(linear,left top,right top,color-stop(0,rgba(255,255,255,1)),color-stop(100%,rgba(255,255,255,0)));
+    background:-webkit-linear-gradient(left,rgba(255,255,255,1) 0,rgba(255,255,255,0) 100%);
+    background:-webkit-linear-gradient(left,rgba(255,255,255,1) 0,rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right,rgba(255,255,255,1) 0,rgba(255,255,255,0) 100%);
+}
+
+.colpick_color_overlay2{
+    position: var(--absolute-position);
+    left: 0;
+    top: 0;
+    width: 156px;
+    height: 156px;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,1)));
+    background:-webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,1) 100%);
+    background:-webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,1) 100%);
+    background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,1) 100%);
+}
+
+/*circular color selector styles*/
+/*outside of the selector*/
+.colpick_selector_outer{
+    background: 0 0;
+    position: var(--absolute-position);
+    width: 11px;
+    height: 11px;
+    margin:-6px 0 0 -6px;
+}
+
+/*inside of the selector*/
+.colpick_selector_inner{
+    position: var(--absolute-position);
+    width: 9px;
+    height: 9px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+
+/*vertical hue bar styles*/
+.colpick_hue{
+    position: var(--absolute-position);
+    top: 6px;
+    left: 175px;
+    width: 19px;
+    height: 156px;
+}
+
+/*hue slider arrow styles*/
+.colpick_hue_arrs{
+    position: var(--absolute-position);
+    left:-8px;
+    width: 35px;
+    height: 7px;
+    margin:-7px 0 0 0;
+}
+
+/*left arrow styles*/
+.colpick_hue_larr{
+    position: var(--absolute-position);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 7px solid #ccc;
+}
+
+/*right arrow styles*/
+.colpick_hue_rarr{
+    position: var(--absolute-position);
+    right: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 7px solid #ccc;
+}
+
+/*new color sampler box styles*/
+.colpick_new_color{
+    position: var(--absolute-position);
+    left: 207px;
+    top: 6px;
+    width: 60px;
+    height: 27px;
+    border: none;
+}
+
+/*hexidecimal box styles*/
+.colpick_field,.colpick_hex_field{
+    position: var(--absolute-position);
+    height: 20px;
+    width: 60px;
+    overflow: hidden;
+    background: #fff;
+    color: #333;
+    font-size: 12px;
+    border: 1px solid #eee;
+}
+
+.colpick_field_letter{
+    position: var(--absolute-position);
+    width: 12px;
+    height: 20px;
+    line-height: 20px;
+    padding-left: 4px;
+    font-weight: 700;
+    color: #333;
+}
+
+.colpick_field input,.colpick_hex_field input{
+    position: var(--absolute-position);
+    right: 11px;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    line-height: 20px;
+    background: 0 0;
+    border: none;
+    color: #333;
+    text-align: right;
+    outline: 0;
+}
+
+.colpick_hex .colpick_hsb_b,.colpick_hex .colpick_hsb_h,.colpick_hex .colpick_hsb_s,.colpick_hex .colpick_rgb_b,.colpick_hex .colpick_rgb_g,.colpick_hex .colpick_rgb_r{
+    display: none;
+}
+
+.colpick_hex{
+    width: 206px;
+    height: 201px;
+}
+
+.colpick_hex .colpick_hex_field{
+    width: 72px;
+    height: 25px;
+    top: 168px;
+    left: 80px;
+}
+
+.colpick_hex .colpick_hex_field div,.colpick_hex .colpick_hex_field input{
+    height: 25px;
+    line-height: 25px;
+}
+
+.colpick_hex .colpick_new_color{
+    left: 7px;
+    top: 168px;
+    width: 30px;
+    border-right: none;
+}
+
+.colpick_hex_ns .colpick_current_color,.colpick_hex_ns .colpick_submit{
+    display: none;
+}
+
+.colpick_hex_ns .colpick_new_color{
+    width: 60px;
+}

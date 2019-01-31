@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="orig-blend.css"/>
+    </head>
+
+    <body onload="polycotton()" onload="IEEdgeDetect()">
+        <!--description of functionality-->
+        <p>To see how your artwork will look on your t-shirt, choose your t-shirt color using the t-shirt icon, then upload your artwork using the upload icon. The artwork will appear in the large preview box. Click the “artwork on tshirt” thumbnail to see how your artwork will look printed on your tshirt. Use the slider to select your fabric blend (cotton fibers do not accept sublimation dyes, so the image will appear faded on poly/cotton blends).</p>
+        <p><b>Accepted file type: JPG, PNG, GIF, BMP</b></p>
+
+        <!--button for going back to upload page after artwork review-->
+        <p style="text-align: center;"><a href="/upload-files"><button style="text-align: center; color: black; background-color: white; border: 2px solid black; text-transform: uppercase; cursor: pointer; border-radius: 5px; padding: 18px 25px;">I’ve previewed my artwork. Proceed to upload files</button></a></p>
+
+        <!--color dropper icon to click for colpick-->
+        <div class="color icon">
+            <svg width="50" height="25" viewBox="0 0 300 300" class="drop-icon">
+                <path stroke="black" stroke-width="10" d="M183.9 13.5h-69.6 L0 56.2l28.3 64.9l28.5-12.9v178.2h184.7V108.2l28.5 12.9l30-64.9L183.9 13.5 Z M149.6 51.9 c-0.1 0-0.3 0-0.4 0c-18-0.2-32.5-14.9-32.5-32.9h65.8C182.5 37.2 167.7 51.9 149.6 51.9 Z"/>
+            </svg>
+            <input type="text" class="color-input" id="bgColor">
+        </div>
+
+        <!--upload file icon to click uploader-->
+        <div class="file icon">
+            <svg width="32" height="32" viewBox="0 0 40 40" class="upload-icon">
+                <path d="M14 18h4v-8h6l-8-8-8 8h6zM20 13.5v3.085l9.158 3.415-13.158 4.907-13.158-4.907 9.158-3.415v-3.085l-12 4.5v8l16 6 16-6v-8z"></path>
+            </svg>
+            <input class="file-input" type="file" onchange="previewFile();" multiple>
+        </div>
+
+        <!--This SVG tag is useless, but taking it out breaks the code. Legacy: this feature allowed text over the selected image-->
+        <svg class="text-icon" id="text-icon"></svg>
+        
+        <div id="poly-cotton-slider">
+            <div id="slider-align">
+                <div class="slider-style"><span id="poly-value"></span>%<br />Cotton</div>
+                <div class="slider-style" id="slider-style"><input type="range" id="poly-cotton-blend" value="100"></div>
+                <div class="slider-style"><span id="cotton-value"></span>%<br />Polyester</div>
+            </div>
+        </div>
+        
+        <div class="preview">
+            <div class="preview-img" id="preview">
+                <!--begin useless code, but taking it out breaks. Associated with legacy text-over-image feature-->
+                <div id="textOptions">
+                    <div class="color icon"></div>
+                    <select name="mode" id="mixMode"></select>
+                </div>
+                <!--end of useless code-->
+            </div>
+        </div>
+        
+        <div class="thumbnail" data-mode="normal"><div class="descriptions">normal artwork</div></div>
+        <div class="thumbnail" data-mode="multiply"><div class="descriptions">artwork on tshirt</div></div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src='https://d33wubrfki0l68.cloudfront.net/js/17fa1f0f0ed8e6fd0e916dc14a056d467db99ca4/demos/css-blender/scripts.min.js'></script>
+
+        <!--sets the poly/cotton onload value to 50%-->
+        <script>
+            function polycotton() {
+                var slider = document.getElementById("poly-cotton-blend");
+                var outputPoly = document.getElementById("poly-value");
+                var outputCotton = document.getElementById("cotton-value");
+                outputPoly.innerHTML = 0;
+                outputCotton.innerHTML = 100;
+            }
+        </script>
+
+        <script>
+            var slider = document.getElementById("poly-cotton-blend");
+            
+            slider.oninput = function() {
+                var outputPoly = document.getElementById("poly-value");
+                var outputCotton = document.getElementById("cotton-value");
+                var preview = document.getElementById("preview");
+                var opacityCotton = this.value/100;
+                
+                outputPoly.innerHTML = 100 - this.value;
+                outputCotton.innerHTML = this.value;
+                preview.style.opacity = opacityCotton;
+            }
+        </script>
+        
+        <!--<script>
+            function IEEdgeDetect() {
+                var version = detectIE();
+                
+                if (version === true) {
+                    alert("The previewer does not work in Internet Explorer. Please use Google Chrome, Firefox, Opera, or Safari to preview your artwork.")
+                }
+                else if (version >= 12) {
+                    alert("The previewer does not work with Microsoft Edge. Please use Google Chrome, Firefox, Opera, or Safari to preview your artwork.")
+                }
+            }
+        </script>-->
+
+        <script>
+            // Get IE or Edge browser version
+            var version = detectIE();
+            
+            // add details to debug result
+            document.getElementById('details').innerHTML = window.navigator.userAgent;
+            
+            function detectIE() {
+                var ua = window.navigator.userAgent;
+                
+                var msie = ua.indexOf('MSIE ');
+                if (msie > 0) {
+                    alert("The previewer cannot function in Internet Explorer. Please use Google Chrome, Firefox, Opera, or Safari to preview your artwork.");
+                }
+                
+                var trident = ua.indexOf('Trident/');
+                if (trident > 0) {
+                    alert("The previewer cannot function in Internet Explorer. Please use Google Chrome, Firefox, Opera, or Safari to preview your artwork.");
+                }
+                
+                var edge = ua.indexOf('Edge/');
+                if (edge > 0) {
+                    alert("The previewer cannot function in Microsoft Edge. Please use Google Chrome, Firefox, Opera, or Safari to preview your artwork.");
+                }
+            }
+        </script>
+        
+	</body>
+</html>
